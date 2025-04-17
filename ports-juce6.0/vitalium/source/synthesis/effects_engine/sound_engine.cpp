@@ -230,7 +230,9 @@ namespace vital {
   void SoundEngine::processWithInput(const poly_float* audio_in, int num_samples) {
     VITAL_ASSERT(num_samples <= output()->buffer_size);
 
+    #if JUCE_INTEL || JUCE_ARM
     FloatVectorOperations::disableDenormalisedNumberSupport();
+    #endif
     modulation_handler_->setLegato(legato_->value());
 
     upsampler_->processWithInput(audio_in, num_samples);

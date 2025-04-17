@@ -242,7 +242,9 @@ namespace vital {
   void SoundEngine::process(int num_samples) {
     VITAL_ASSERT(num_samples <= output()->buffer_size);
 
+    #if JUCE_INTEL || JUCE_ARM
     FloatVectorOperations::disableDenormalisedNumberSupport();
+    #endif
     voice_handler_->setLegato(legato_->value());
     ProcessorRouter::process(num_samples);
 
