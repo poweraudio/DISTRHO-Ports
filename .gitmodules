@@ -10,3 +10,6 @@
 [submodule "libs/juce5/source"]
 	path = libs/juce5/source
 	url = https://github.com/poweraudio/distrho-juce
+[submodule "libs/juce5-gpl2/source"]
+	path = libs/juce5-gpl2/source
+	url = /usr/local/src/distrho-juce/

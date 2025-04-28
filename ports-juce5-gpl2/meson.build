@@ -2,42 +2,45 @@
 
 if linux_headless
     plugins = [
-        'drowaudio-tremolo',
-        'luftikus',
-        'obxd',
-        'temper',
-        'vex',
-        'wolpertinger',
+        'arctican-function',
+        'arctican-pilgrim',
+        'drowaudio-distortion',
+        'drowaudio-distortionshaper',
+        'drowaudio-flanger',
+        'drowaudio-reverb',
+        'tal-dub-3',
+        'tal-filter',
+        'tal-filter-2',
+        'tal-noisemaker',
+        'tal-reverb',
+        'tal-reverb-2',
+        'tal-reverb-3',
+        'tal-vocoder-2',
     ]
 else
     plugins = [
-        'dexed',
-        'drowaudio-tremolo',
-        'drumsynth',
-        'easySSP',
-        'eqinox',
-        'HiReSam',
-        'juce-opl',
-        'klangfalter',
-        'LUFSMeter',
-        'LUFSMeter-Multi',
-        'luftikus',
-        'obxd',
-        'pitchedDelay',
-        'refine',
-        'stereosourceseparation',
-        'temper',
-        'vex',
-        'wolpertinger',
+        'arctican-function',
+        'arctican-pilgrim',
+        'drowaudio-distortion',
+        'drowaudio-distortionshaper',
+        'drowaudio-flanger',
+        'drowaudio-reverb',
+        'tal-dub-3',
+        'tal-filter',
+        'tal-filter-2',
+        'tal-noisemaker',
+        'tal-reverb',
+        'tal-reverb-2',
+        'tal-reverb-3',
+        'tal-vocoder-2',
     ]
 endif
 
 plugin_include_dirs = [
     include_directories('../libs/drowaudio/source'),
-    include_directories('../libs/juced/source'),
-    include_directories('../libs/juce5'),
-    include_directories('../libs/juce5/source'),
-    include_directories('../libs/juce5/source/modules'),
+    include_directories('../libs/juce5-gpl2'),
+    include_directories('../libs/juce5-gpl2/source'),
+    include_directories('../libs/juce5-gpl2/source/modules'),
     include_directories('../libs/juce-plugin'),
 ]
 
@@ -127,17 +130,12 @@ build_flags_drowaudio = [
     '-DUSE_DROWAUDIO=1',
 ]
 
-build_flags_juced = [
-    '-DUSE_JUCED=1',
-]
-
 ###############################################################################
 
 if build_lv2 or build_vst2
     foreach plugin : plugins
         if plugin in get_option('plugins')
             plugin_uses_drowaudio = false
-            plugin_uses_juced = false
             plugin_uses_devices = false
             plugin_uses_opengl = false
             plugin_extra_dependencies = []
@@ -158,11 +156,7 @@ if build_lv2 or build_vst2
             ]
 
             if plugin_uses_drowaudio
-                link_with_plugin += lib_drowaudio_juce5
-            endif
-
-            if plugin_uses_juced
-                link_with_plugin += lib_juced
+                link_with_plugin += lib_drowaudio_juce5_gpl2
             endif
 
             if plugin_uses_devices

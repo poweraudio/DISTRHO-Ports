@@ -19,13 +19,19 @@
 #include "modules/juce_audio_utils/juce_audio_utils.h"
 #include "modules/juce_core/juce_core.h"
 #include "modules/juce_data_structures/juce_data_structures.h"
+#if JUCE_MODULE_AVAILABLE_juce_dsp
 #include "modules/juce_dsp/juce_dsp.h"
+#endif
 #include "modules/juce_events/juce_events.h"
 #include "modules/juce_graphics/juce_graphics.h"
 #include "modules/juce_gui_basics/juce_gui_basics.h"
 #include "modules/juce_gui_extra/juce_gui_extra.h"
 #if JUCE_MODULE_AVAILABLE_juce_opengl
 #include "modules/juce_opengl/juce_opengl.h"
+#endif
+
+#ifndef JUCE_NON_ISC_MODULES_MAJOR_VERSION
+#define JUCE_NON_ISC_MODULES_MAJOR_VERSION JUCE_MAJOR_VERSION
 #endif
 
 #endif // JUCE_PLUGIN_MAIN_H_INCLUDED

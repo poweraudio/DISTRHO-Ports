@@ -40,6 +40,7 @@ linux_headless = get_option('linux-headless')
 build_lv2 = get_option('build-lv2')
 build_vst2 = get_option('build-vst2') and not linux_headless
 build_vst3 = get_option('build-vst3') and not linux_headless
+build_juce5_gpl2_only = get_option('build-juce5-gpl2-only')
 build_juce5_only = get_option('build-juce5-only')
 build_juce60_only = get_option('build-juce60-only')
 build_juce61_only = get_option('build-juce61-only')
@@ -344,24 +345,41 @@ endif
 ###############################################################################
 # go into subdir to build libraries and plugins
 
+build_only_flags = [
+    build_juce5_gpl2_only,
+    build_juce5_only,
+    build_juce60_only,
+    build_juce61_only,
+    build_juce7_only,
+]
+
 subdir('libs')
 
-if not (build_juce60_only or build_juce61_only or build_juce7_only)
-    subdir('ports-juce5')
+ports_dirs = [
+    'ports-juce5-gpl2',
+    'ports-juce5',
+    'ports-juce6.0',
+    'ports-juce6.1',
+    # NOTICE no plugins imported that use juce7 yet
+    'ports-juce7',
+]
+
+enabled_ports_dirs = []
+foreach i : range(ports_dirs.length())
+    if build_only_flags[i]
+        enabled_ports_dirs += [ports_dirs[i]]
+    endif
+endforeach
+
+if enabled_ports_dirs.length() > 1
+    enabled_ports_dirs = []
+elif enabled_ports_dirs == []
+    enabled_ports_dirs = ports_dirs
 endif
 
-if not (build_juce5_only or build_juce61_only or build_juce7_only)
-    subdir('ports-juce6.0')
-endif
-
-if not (build_juce5_only or build_juce60_only or build_juce7_only)
-    subdir('ports-juce6.1')
-endif
-
-# NOTICE no plugins imported that use juce7 yet
-if not (build_juce5_only or build_juce60_only or build_juce61_only)
-    subdir('ports-juce7')
-endif
+foreach ports_dir : enabled_ports_dirs
+    subdir(ports_dir)
+endforeach
 
 ###############################################################################
 # extra files to install

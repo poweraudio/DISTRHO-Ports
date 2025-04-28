@@ -79,7 +79,7 @@ BasicFileBrowser::BasicFileBrowser (int flags_,
     addAndMakeVisible (list);
     	
     fileListComponent->addListener (this);
-	list->getViewport()->getVerticalScrollBar().setAutoHide (false);
+	deref(list->getViewport()->getVerticalScrollBar()).setAutoHide (false);
 		
 	resizer = new ResizableCornerComponent (this, &resizeLimits);
 	addAndMakeVisible (resizer);
@@ -257,7 +257,7 @@ void BasicFileBrowser::resized()
     if (list != nullptr)
     {
         list->setBounds (0, 0, width, height);
-        ScrollBar &bar = list->getVerticalScrollBar();
+        ScrollBar &bar = deref(list->getVerticalScrollBar());
         const int size = roundToInt (bar.getWidth() * 1.5f);
 
         if (showResizer)

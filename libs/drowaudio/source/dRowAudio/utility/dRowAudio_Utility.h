@@ -581,5 +581,15 @@ struct ScopedChangeSender
 
 #endif // #ifndef UNUSED_NOWARN
 
+template <typename T>
+T& deref(T* value) {
+    return *value;
+}
+
+template <typename T>
+T& deref(T& value) {
+    return value;
+}
+
 
 #endif //__DROWAUDIO_UTILITY_H__

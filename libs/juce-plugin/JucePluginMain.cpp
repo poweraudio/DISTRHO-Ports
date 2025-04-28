@@ -35,7 +35,14 @@
  namespace Vst2 {
  #include "modules/juce_audio_processors/format_types/juce_VSTInterface.h"
  }
+ #if JUCE_NON_ISC_MODULES_MAJOR_VERSION < 5
+  using namespace Vst2;
+  namespace juce {
+ #endif
  #include "modules/juce_audio_processors/format_types/juce_VSTMidiEventList.h"
+ #if JUCE_NON_ISC_MODULES_MAJOR_VERSION < 5
+  } // namespace juce
+ #endif
  #if JUCE_MAJOR_VERSION >= 7
   #include "modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.cpp"
  #else

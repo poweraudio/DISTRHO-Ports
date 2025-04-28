@@ -46,6 +46,12 @@ option('build-vst3',
     description: 'Build VST3 plugin variants',
 )
 
+option('build-juce5-gpl2-only',
+    type: 'boolean',
+    value: false,
+    description: 'Build only plugins that use the GPLv2 version of JUCE',
+)
+
 option('build-juce5-only',
     type: 'boolean',
     value: false,
