@@ -2,6 +2,9 @@
 
 This fork of DISTRHO Ports has the following changes:
 
+* In this branch, `with-license-info`, license information has been added in
+  a README file for each plugin. Additionally, GPLv2-only plugins are built
+  with a GPLv2-licensed version of JUCE.
 * Plugins are built with [a fork of JUCE] that includes fixes for IBM Power.
 * Modified Vitalium to use [SIMDe] on architectures without native SIMD
   support, enabling builds on Power. SIMDe v0.8+ must be installed on your
